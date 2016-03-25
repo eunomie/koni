@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :team do
-    name ""
+    name Faker::Team.name
     organisation nil
   end
 end

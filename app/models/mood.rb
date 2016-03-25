@@ -1,3 +1,4 @@
+# The mood of a user at a date.
 class Mood < ActiveRecord::Base
   validates :local_date, presence: true
   validates :feeling, presence: true
@@ -5,8 +6,8 @@ class Mood < ActiveRecord::Base
   has_one :team
 
   enum feeling: {
-                 good: 'good',
-                 ordinary: 'ordinary',
-                 bad: 'bad'
-                }
+    good: 'good',
+    ordinary: 'ordinary',
+    bad: 'bad'
+  }
 end
