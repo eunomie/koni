@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
+
+  get 'welcome/index'
+
   namespace :admin do
-    
     root to: "#index"
   end
 
