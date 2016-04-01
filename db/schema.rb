@@ -40,23 +40,36 @@ ActiveRecord::Schema.define(version: 20160325221803) do
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "note_id"
+    t.integer  "mood_id"
   end
 
+  add_index "teams", ["mood_id"], name: "index_teams_on_mood_id", using: :btree
+  add_index "teams", ["note_id"], name: "index_teams_on_note_id", using: :btree
   add_index "teams", ["organization_id"], name: "index_teams_on_organization_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.string   "email",                          null: false
+    t.string   "name",                           null: false
     t.string   "encrypted_password", limit: 128, null: false
     t.string   "confirmation_token", limit: 128
     t.string   "remember_token",     limit: 128, null: false
+    t.integer  "organization_id"
+    t.integer  "team_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["organization_id"], name: "index_users_on_organization_id", using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["team_id"], name: "index_users_on_team_id", using: :btree
 
   add_foreign_key "moods", "organizations"
   add_foreign_key "notes", "organizations"
+  add_foreign_key "teams", "moods"
+  add_foreign_key "teams", "notes"
   add_foreign_key "teams", "organizations"
+  add_foreign_key "users", "organizations"
+  add_foreign_key "users", "teams"
 end
